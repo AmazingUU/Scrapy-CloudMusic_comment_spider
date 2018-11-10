@@ -22,5 +22,5 @@ class SpiderSpider(scrapy.Spider):
             day_hot_song_item['song_id'] = song['id']
             day_hot_song_item['name'] = song['name']
             day_hot_song_item['singer'] = song['artists'][0]['name']
-            print(day_hot_song_item)
+            # print(day_hot_song_item)
             yield day_hot_song_item

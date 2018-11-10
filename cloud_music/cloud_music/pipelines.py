@@ -10,11 +10,14 @@ from cloud_music.items import DayHotSongItem
 
 
 class CloudMusicPipeline(object):
+    db = DbHelper()
+    db.connenct(const.DB_CONFIGS)
+
+    def insert_into_day_hot_song(self, item):
+        self.db.save_one_data_to_day_hot_song(item)
+
     def process_item(self, item, spider):
-        db = DbHelper()
-        db.connenct(const.DB_CONFIGS)
-        if isinstance(item,DayHotSongItem):
-            db.save_one_data_to_day_hot_song(item)
+        if isinstance(item, DayHotSongItem):
+            self.insert_into_day_hot_song(item)
 
         return item
-
