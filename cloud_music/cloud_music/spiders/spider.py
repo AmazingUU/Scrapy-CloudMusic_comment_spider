@@ -86,7 +86,7 @@ def get_comment(response):  # 从返回的评论JSON中分析出最新评论的�
 
         yield data
 
-def post(response):
+def get_data(response):
     song_id = response.meta['song_id']
     res = json.loads(response.text)
     for data in get_hot_comment(res):
@@ -124,4 +124,4 @@ class SpiderSpider(scrapy.Spider):
                          'encSecKey': encSecKey}
             url = comment_url.format(song['id'])
             # print(form_data)
-            yield scrapy.FormRequest(url=url,callback=post,formdata=form_data,meta={'song_id':song['id']},dont_filter=True)
+            yield scrapy.FormRequest(url=url,callback=get_data,formdata=form_data,meta={'song_id':song['id']},dont_filter=True)

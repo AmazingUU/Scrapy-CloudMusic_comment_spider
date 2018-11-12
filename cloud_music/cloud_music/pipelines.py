@@ -23,6 +23,7 @@ class CloudMusicPipeline(object):
         self.db.save_one_data_to_comment(item)
 
     def process_item(self, item, spider):
+        # 根据传过来的item类型分别存储进对应的数据库
         if isinstance(item, DayHotSongItem):
             self.insert_into_day_hot_song(item)
         elif isinstance(item,HotCommentItem):
